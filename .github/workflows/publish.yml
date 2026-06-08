@@ -1,0 +1,33 @@
+name: Publish to PyPI
+
+# Publishes mcp-yahoo-fantasy (in yahoo/) to PyPI when a GitHub Release is published,
+# using PyPI Trusted Publishing (OIDC) -- no API token stored in the repo.
+# Bump the version in yahoo/pyproject.toml before cutting the release; PyPI rejects
+# re-uploading an existing version.
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/mcp-yahoo-fantasy/
+    permissions:
+      id-token: write # required for trusted publishing
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Build the package
+        working-directory: yahoo
+        run: uv build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: yahoo/dist
