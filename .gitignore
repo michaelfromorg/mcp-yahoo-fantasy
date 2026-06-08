@@ -2,6 +2,14 @@
 
 env/
 
+# Yahoo OAuth2 credentials + tokens -- never commit these
+oauth2.json
+*.oauth2.json
+private.json
+token.json
+.yahoofantasy
+*.yahoofantasy
+
 ### Python.gitignore
 
 # Byte-compiled / optimized / DLL files

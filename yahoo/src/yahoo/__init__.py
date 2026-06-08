@@ -1,12 +1,9 @@
-import asyncio
-
-from . import server
+from .server import mcp
 
 
 def main():
-    """Main entry point for the package."""
-    asyncio.run(server.main())
+    """Run the Yahoo Fantasy MCP server over stdio."""
+    mcp.run()
 
 
-# Optionally expose other important items at package level
-__all__ = ["main", "server"]
+__all__ = ["main", "mcp"]

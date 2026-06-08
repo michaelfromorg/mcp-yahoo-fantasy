@@ -7,7 +7,6 @@
     },
     "files.insertFinalNewline": true,
     "python.analysis.extraPaths": [
-        "{workspaceFolder}/nhl/src",
         "{workspaceFolder}/yahoo/src"
     ]
 }

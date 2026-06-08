@@ -1,24 +1,12 @@
 #!/bin/bash
 
-# Creates virtual environments and install basic dependencies.
+# Install dependencies for the Yahoo Fantasy MCP server.
 
-export UV_PROJECT_ENVIRONMENT="env"
+set -e
 
-directories=("nhl" "yahoo")
+cd "$(dirname "$0")/../yahoo"
+uv sync
 
-for dir in "${directories[@]}"; do
-    cd "$dir" || exit
-    uv venv env --python 3.12
-    
-    if [[ "$OSTYPE" == "msys" ]]; then
-        # shellcheck disable=SC1091
-        source env/Scripts/activate
-    else
-        # shellcheck disable=SC1091
-        source env/bin/activate
-    fi
-    
-    uv pip install httpx mcp
-    deactivate
-    cd ..
-done
+echo
+echo "Dependencies installed. Next: log in to Yahoo (one time):"
+echo "  cd yahoo && uv run yahoo-login --client-id <id> --client-secret <secret>"
